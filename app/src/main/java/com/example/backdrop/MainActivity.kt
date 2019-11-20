@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
+import android.webkit.WebViewClient
 import android.widget.Magnifier
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +15,6 @@ import kotlin.math.max
 import kotlin.math.min
 
 class MainActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
+        search.webViewClient = WebViewClient()
+
         magnifier_text.customSelectionActionModeCallback =
             object : android.view.ActionMode.Callback2() {
                 override fun onActionItemClicked(
@@ -63,7 +65,11 @@ class MainActivity : AppCompatActivity() {
                     when (item?.itemId) {
                         R.id.magnifier_text -> {
                             behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-                            behavior_text.text = fetchSelectSequence(magnifier_text)
+                            search.loadUrl(
+                                "https://search.yahoo.co.jp/search?p=${fetchSelectSequence(
+                                    magnifier_text
+                                )}"
+                            )
                         }
                         else -> Unit
                     }
@@ -90,6 +96,10 @@ class MainActivity : AppCompatActivity() {
                     return
                 }
             }
+
+        cancel_image.setOnClickListener {
+            behavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
     }
 
     private fun fetchSelectSequence(tv: TextView): CharSequence {

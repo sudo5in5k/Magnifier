@@ -15,17 +15,41 @@
         android:id="@+id/behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/shape_bottom_sheet_rounded_corners_20dp"
         android:orientation="vertical"
         app:behavior_hideable="true"
         app:behavior_peekHeight="40dp"
         app:layout_behavior="@string/bottom_sheet_behavior">
 
-        <TextView
-            android:id="@+id/behavior_text"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center" />
+            android:layout_height="40dp">
+
+            <ImageView
+                android:id="@+id/expand_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="10dp"
+                android:contentDescription="@string/default_description"
+                android:src="@drawable/ic_expand_less_black_24dp" />
+
+            <ImageView
+                android:id="@+id/cancel_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/default_description"
+                android:src="@drawable/ic_close_black_24dp" />
+
+        </FrameLayout>
+
+        <WebView
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dp" />
 
     </LinearLayout>
 
